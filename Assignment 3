@@ -1,0 +1,149 @@
+
+#include<iostream>
+#include <cstdlib>
+#include<string>
+#include<vector>
+#include <sstream>
+using namespace std;
+
+//Define a struct and declaring variables
+struct TokenFreq
+{
+string token;
+int freq;
+};
+//Defines the function getleastfrequentletter() and declares variables
+void getleastfrequentletter(string value)
+{//intializes data=27 due to alphabets
+int Data[27] = {0};
+for(int i = 0; i< value.size(); ++i)
+{
+//check if the values are greater than 65 & less than 90 for ascii values
+if(value[i] >= 65 && value[i] <= 90)
+{
+//Giving a value to i
+value[i] += value[i] + 32;
+}
+if(value[i] >= 97 && value[i] <= 122)
+{
+Data[value[i] - 97]++;
+}
+}
+//Declaration of id
+int id = 0;
+//this loop cehcks for letters
+for(int i = 1; i< 26; ++i)
+{
+if(Data[id] > Data[i]){
+id = i;
+}
+}
+//displays the result
+cout << "Least Frequent Char is " << (char)(id+ 97) << " and freq of the char is " << Data[id] << endl;
+}
+
+//Defines TokenFreq1 using struct TokenFreq
+vector<TokenFreq> TokenFreq1( string & val)
+{
+int indexVal=0;
+//declare variable
+vector<TokenFreq> TFreq;
+string token="";
+//perform push back of tokenfreq
+TFreq.push_back(TokenFreq());
+int r=0;
+int val1=0;
+//for loop to check length
+for(int j=0;j<val.length();j++)
+{
+//checks the special characters
+if(val[j]==' ' || val[j]==',' || val[j]=='.' ||val[j]==';' || val[j]==':')
+{
+  //val1=0
+val1=0;
+for(int i = 0; i<TFreq.size(); i++)
+{
+//checks the count
+if(TFreq[i].token==token)
+{
+//increments the frequency and changes the value of val1
+TFreq[i].freq++;
+val1=1;
+token="";
+}
+}
+//conditioning val1
+if(val1==0)
+{
+f++;
+//Give token the its value
+TFreq[indexVal].token=token;
+//change the frequency to 1
+TFreq[indexVal].freq=1;
+//increment the index by 1
+indexVal++;
+TFreq.push_back(TokenFreq());
+token="";
+}
+}
+else
+{
+//Assigns the token value
+token=token+val[j];
+}
+}
+val1=0;
+//for loop for size
+for(int i = 0; i<TFreq.size(); i++)
+{
+//check the frequency
+if(TFreq[i].token==token)
+{
+//increment the frequency
+TFreq[i].freq++;
+val=1;
+token="";
+}
+
+}
+//checks the value
+if(val1==0)
+{
+//Prints the token
+cout<<token;
+//Assign the token
+TFreq[indexVal].token=token;
+//Assigns the frequency
+TFreq[indexVal].freq=1;
+//increments the index value
+indexVal++;
+}
+//Displays the result
+cout<<"\nVectors with frequency-------------------"<<endl;
+//prints the result
+for(int i = 0; i<TFreq.size()-1; i++)
+{
+cout<<TFreq[i].token<<": "<<TFreq[i].freq<<endl;
+}
+return TFreq;
+}
+int main()
+{
+//declares a string variable
+string value;
+vector<TokenFreq> TFreq1;
+//creates a vector token
+vector<TokenFreq> TFreq2;
+//getting the user input
+cout<<"Enter the text:"<<endl;
+//get the input
+getline(cin,value);
+//call the function TokenFreq1
+TFreq1=TokenFreq1(value);
+//call getleastfreqletter()
+getleastfreqletter(value);
+//to freeze console
+system("stop");
+return 0;
+
+}
