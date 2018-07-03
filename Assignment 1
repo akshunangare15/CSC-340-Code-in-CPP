@@ -29,7 +29,7 @@ string ReformatDate(string oldDate){
       if(i < 9){
         newDate += '0';
         newDate += (char)((i + 1) + '0');
-      }else{
+      }else
         int a = (i + 1)/10;
         int b = (i + 1)%10;
         newDate += (char)(a + '0');
